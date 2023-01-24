@@ -77,12 +77,12 @@ module StarkCore
 
           begin
             return [DateTime.strptime(data, '%Y-%m-%dT%H:%M:%S.%L+00:00'), 'datetime']
-            rescue ArgumentError
+          rescue ArgumentError
           end
 
           begin
             return [DateTime.strptime(data, '%Y-%m-%dT%H:%M:%S+00:00'), 'datetime']
-            rescue ArgumentError
+          rescue ArgumentError
           end
 
           begin
