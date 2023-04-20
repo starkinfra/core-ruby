@@ -1,6 +1,7 @@
 require_relative "user/organization"
 require_relative "user/project"
 require_relative "user/user"
+require_relative "user/public_user"
 require_relative "utils/api"
 require_relative "utils/cache"
 require_relative "utils/case"

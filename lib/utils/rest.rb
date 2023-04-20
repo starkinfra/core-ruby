@@ -167,6 +167,22 @@ module StarkCore
         return StarkCore::Utils::API.from_api_json(resource_maker, entity_json)
       end
 
+      def self.post_sub_resource(resource_name:, sub_resource_maker:, sub_resource_name:, sdk_version:, host:, api_version:, user:, language:, timeout:, entity:, id:)
+        payload = StarkCore::Utils::API.api_json(entity)
+        json = StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'POST',
+          path: "#{StarkCore::Utils::API.endpoint(resource_name)}/#{id}/#{StarkCore::Utils::API.endpoint(sub_resource_name)}",
+          payload: payload,
+          api_version: api_version,
+          timeout: timeout
+        ).json
+        entity_json = json[StarkCore::Utils::API.last_name(sub_resource_name)]
+        return StarkCore::Utils::API.from_api_json(sub_resource_maker, entity_json)
+      end
+
       def self.delete_id(resource_name:, resource_maker:, sdk_version:, host:, api_version:, user:, language:, timeout:, id:)
         json = StarkCore::Utils::Request.fetch(
           host: host,

@@ -41,10 +41,16 @@ module StarkCore
         url = "#{base_url}/#{path}#{StarkCore::Utils::URL.urlencode(query)}"
         uri = URI(url)
 
-        access_time = Time.now.to_i
+        agent = "Ruby-#{RUBY_VERSION}-SDK-#{host}-#{sdk_version}"
+
         body = payload.nil? ? '' : payload.to_json
-        message = "#{user.access_id}:#{access_time}:#{body}"
-        signature = EllipticCurve::Ecdsa.sign(message, user.private_key).toBase64
+
+        headers = {
+          'User-Agent' => agent,
+          'Accept-Language' => language,
+          'Content-Type' => 'application/json'
+        }
+        headers.update(_authentication_headers(user, body))
 
         case method
           when 'GET'
@@ -64,12 +70,9 @@ module StarkCore
             raise(ArgumentError, 'unknown HTTP method ' + method)
         end
 
-        req['Access-Id'] = user.access_id
-        req['Access-Time'] = access_time
-        req['Access-Signature'] = signature
-        req['Content-Type'] = 'application/json'
-        req['User-Agent'] = "Ruby-#{RUBY_VERSION}-SDK-#{host}-#{sdk_version}"
-        req['Accept-Language'] = language
+        headers.each do |key, value|
+          req[key] = value
+        end
 
         request = Net::HTTP.start(uri.hostname, use_ssl: true) { |http| http.request(req) }
 
@@ -80,6 +83,20 @@ module StarkCore
         raise(StarkCore::Error::UnknownError, response.content) unless response.status == 200
 
         return response
+      end
+
+      def self._authentication_headers(user, body)
+        return {} if user.instance_of?(StarkCore::PublicUser)
+        
+        access_time = Time.now.to_i
+        message = "#{user.access_id}:#{access_time}:#{body}"
+        signature = EllipticCurve::Ecdsa.sign(message, user.private_key).toBase64
+        
+        return {
+          "Access-Id" => user.access_id(),
+          "Access-Time" => access_time,
+          "Access-Signature" => signature,
+        }
       end
     end
   end
