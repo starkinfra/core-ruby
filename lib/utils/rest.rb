@@ -197,7 +197,7 @@ module StarkCore
       end
 
       def self.get_raw(sdk_version:, host:, api_version:, path:, user:, language:, timeout:, **query)
-        return json = StarkCore::Utils::Request.fetch(
+        json = StarkCore::Utils::Request.fetch(
           host: host,
           sdk_version: sdk_version,
           user: user,
@@ -206,6 +206,23 @@ module StarkCore
           api_version: api_version,
           timeout: timeout
         ).json
+        return json
+      end
+
+      def self.post_raw(sdk_version:, host:, api_version:, user:, language:, path:, payload:, timeout:, **query)
+        json =  StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'POST',
+          path: path,
+          query: query,
+          payload: payload,
+          api_version: api_version,
+          language: language,
+          timeout: timeout,
+          ).json
+        return json
       end
     end
   end
