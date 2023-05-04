@@ -13,8 +13,11 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.1.0] - 2023-05-04
 ### Added
 - post_raw method
 
+## [0.0.1] - 2023-01-04
 ### Added
 - starkcore API basic functionalities for starkbank and starkinfra 

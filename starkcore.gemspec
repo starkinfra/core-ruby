@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Gem::Specification.new do |s|
-  s.name = 'starkinfra-core'
-  s.version = '0.0.1'
+  s.name = 'starkcore'
+  s.version = '0.1.0'
   s.summary = 'Basic SDK functionalities for the starkbank and starkinfra SDKs'
   s.authors = 'starkinfra'
   s.homepage = 'https://github.com/starkinfra/core-ruby'
