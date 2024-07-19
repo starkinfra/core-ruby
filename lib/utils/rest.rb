@@ -196,20 +196,23 @@ module StarkCore
         return StarkCore::Utils::API.from_api_json(resource_maker, entity)
       end
 
-      def self.get_raw(sdk_version:, host:, api_version:, path:, user:, language:, timeout:, **query)
+      def self.get_raw(sdk_version:, host:, api_version:, path:, user:, language:, timeout:, prefix:, raiseException:, **query)
         json = StarkCore::Utils::Request.fetch(
           host: host,
           sdk_version: sdk_version,
           user: user,
           method: 'GET',
           path: path,
+          query: query,
           api_version: api_version,
-          timeout: timeout
+          timeout: timeout,
+          prefix: prefix,
+          raiseException: raiseException
         ).json
         return json
       end
 
-      def self.post_raw(sdk_version:, host:, api_version:, user:, language:, path:, payload:, timeout:, **query)
+      def self.post_raw(sdk_version:, host:, api_version:, user:, language:, path:, payload:, timeout:, prefix:, raiseException:, **query)
         json =  StarkCore::Utils::Request.fetch(
           host: host,
           sdk_version: sdk_version,
@@ -221,9 +224,65 @@ module StarkCore
           api_version: api_version,
           language: language,
           timeout: timeout,
+          prefix: prefix,
+          raiseException: raiseException
           ).json
         return json
       end
+
+      def self.patch_raw(sdk_version:, host:, api_version:, user:, language:, path:, payload:, timeout:, prefix:, raiseException:, **query)
+        json =  StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'PATCH',
+          path: path,
+          query: query,
+          payload: payload,
+          api_version: api_version,
+          language: language,
+          timeout: timeout,
+          prefix: prefix,
+          raiseException: raiseException
+          ).json
+        return json
+      end
+
+      def self.put_raw(sdk_version:, host:, api_version:, user:, language:, path:, payload:, timeout:, prefix:, raiseException:, **query)
+        json =  StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'PUT',
+          path: path,
+          query: query,
+          payload: payload,
+          api_version: api_version,
+          language: language,
+          timeout: timeout,
+          prefix: prefix,
+          raiseException: raiseException
+          ).json
+        return json
+      end
+
+      def self.delete_raw(sdk_version:, host:, api_version:, user:, language:, path:, timeout:, prefix:, raiseException:, **query)
+        json =  StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'DELETE',
+          path: path,
+          query: query,
+          api_version: api_version,
+          language: language,
+          timeout: timeout,
+          prefix: prefix,
+          raiseException: raiseException
+          ).json
+        return json
+      end
+
     end
   end
 end

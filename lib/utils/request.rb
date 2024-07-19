@@ -23,7 +23,7 @@ module StarkCore
       end
 
       def self.fetch(host:, sdk_version:, user:, method:, path:, payload: nil, query: nil, 
-                      api_version: "v2", language: "en-US", timeout: 15)
+                      api_version: "v2", language: "en-US", timeout: 15, prefix: nil, raiseException: true)
         user = Checks.check_user(user)
         language = Checks.check_language(language)
 
@@ -64,16 +64,20 @@ module StarkCore
             raise(ArgumentError, 'unknown HTTP method ' + method)
         end
 
+        agent = prefix ? "Joker-Ruby-#{RUBY_VERSION}-SDK-#{host}-#{sdk_version}" : "Ruby-#{RUBY_VERSION}-SDK-#{host}-#{sdk_version}"
+
         req['Access-Id'] = user.access_id
         req['Access-Time'] = access_time
         req['Access-Signature'] = signature
         req['Content-Type'] = 'application/json'
-        req['User-Agent'] = "Ruby-#{RUBY_VERSION}-SDK-#{host}-#{sdk_version}"
+        req['User-Agent'] = agent
         req['Accept-Language'] = language
 
         request = Net::HTTP.start(uri.hostname, use_ssl: true) { |http| http.request(req) }
 
         response = Response.new(Integer(request.code, 10), request.body)
+
+        return response if raiseException != true
 
         raise(StarkCore::Error::InternalServerError) if response.status == 500
         raise(StarkCore::Error::InputErrors, response.json['errors']) if response.status == 400
