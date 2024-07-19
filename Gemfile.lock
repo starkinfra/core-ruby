@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    starkinfra-core (0.1.0)
+    starkinfra-core (0.2.0)
       starkbank-ecdsa (~> 2.0.0)
 
 GEM
