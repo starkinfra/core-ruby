@@ -32,7 +32,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
   invoice = invoices["invoices"][0]
@@ -65,7 +65,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
   invoice = invoices["invoices"][0]
@@ -87,7 +87,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
     invoice = invoices["invoices"][0]
@@ -107,7 +107,7 @@ describe StarkCore::Utils::Rest do
         timeout: 15,
         prefix: "Joker",
         raiseException: false,
-        limit: 1
+        query: {"limit": 1}
     )
 
     puts invoice
@@ -138,7 +138,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
   profile = profiles["profiles"][0]
@@ -177,7 +177,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
   deletedTransfer = StarkCore::Utils::Rest.delete_raw(
@@ -190,7 +190,7 @@ describe StarkCore::Utils::Rest do
       timeout: 15,
       prefix: "Joker",
       raiseException: false,
-      limit: 1
+      query: {"limit": 1}
     )
 
     deletedTransfer = deletedTransfer["transfer"]
