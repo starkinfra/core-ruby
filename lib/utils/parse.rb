@@ -70,8 +70,10 @@ module StarkCore
           user: user,
           language: language,
           timeout: timeout,
-          limit: 1
-        )['publicKeys'][0]['content']
+          query: {"limit": 1},
+          prefix: nil,
+          raiseException: true
+        ).json['publicKeys'][0]['content']
         public_key = EllipticCurve::PublicKey.fromPem(pem)
         StarkCore::Utils::Cache.starkbank_public_key = public_key
         return public_key

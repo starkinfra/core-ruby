@@ -33,7 +33,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
+    ).json()
 
   invoice = invoices["invoices"][0]
     puts invoice
@@ -66,7 +66,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
+    ).json()
 
   invoice = invoices["invoices"][0]
     puts invoice
@@ -88,8 +88,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
-
+    ).json()
     invoice = invoices["invoices"][0]
 
     payload = {
@@ -108,7 +107,7 @@ describe StarkCore::Utils::Rest do
         prefix: "Joker",
         raiseException: false,
         query: {"limit": 1}
-    )
+    ).json()
 
     puts invoice
     expect(invoice["invoice"]["amount"]).wont_be_nil
@@ -139,7 +138,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
+    ).json()
 
   profile = profiles["profiles"][0]
     puts profile
@@ -178,7 +177,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
+    ).json()
 
   deletedTransfer = StarkCore::Utils::Rest.delete_raw(
       sdk_version: "0.0.0",
@@ -191,7 +190,7 @@ describe StarkCore::Utils::Rest do
       prefix: "Joker",
       raiseException: false,
       query: {"limit": 1}
-    )
+    ).json()
 
     deletedTransfer = deletedTransfer["transfer"]
     expect(deletedTransfer["id"]).wont_be_nil
