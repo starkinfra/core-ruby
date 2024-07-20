@@ -208,7 +208,7 @@ module StarkCore
           timeout: timeout,
           prefix: prefix,
           raiseException: raiseException
-        ).json
+        )
         return json
       end
 
@@ -226,7 +226,7 @@ module StarkCore
           timeout: timeout,
           prefix: prefix,
           raiseException: raiseException
-          ).json
+          )
         return json
       end
 
@@ -244,7 +244,7 @@ module StarkCore
           timeout: timeout,
           prefix: prefix,
           raiseException: raiseException
-          ).json
+          )
         return json
       end
 
@@ -262,7 +262,7 @@ module StarkCore
           timeout: timeout,
           prefix: prefix,
           raiseException: raiseException
-          ).json
+          )
         return json
       end
 
@@ -279,7 +279,7 @@ module StarkCore
           timeout: timeout,
           prefix: prefix,
           raiseException: raiseException
-          ).json
+          )
         return json
       end
 
