@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = 'starkcore'
-  s.version = '0.2.1'
+  s.version = '0.2.2'
   s.summary = 'Basic SDK functionalities for the starkbank and starkinfra SDKs'
   s.authors = 'starkinfra'
   s.homepage = 'https://github.com/starkinfra/core-ruby'
