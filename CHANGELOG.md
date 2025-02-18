@@ -13,6 +13,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+### Added
+- post_sub_resource method
 
 ## [0.2.2] - 2023-07-20
 ### Fixed
