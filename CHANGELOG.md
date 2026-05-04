@@ -15,6 +15,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 ## [Unreleased]
 ### Added
 - post_sub_resource method
+### Changed
+- starkbank-ecdsa to v2.1.0
 
 ## [0.2.2] - 2023-07-20
 ### Fixed
