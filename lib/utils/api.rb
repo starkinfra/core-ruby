@@ -74,6 +74,7 @@ module StarkCore
         return base if base[-1].eql?('s')
         return "#{base}s" if base[-2..-1].eql?('ey')
         return "#{base[0...-1]}ies" if base[-1].eql?('y')
+        return "#{base}es" if base.end_with?('ch', 'sh', 'x')
 
         return "#{base}s"
       end
