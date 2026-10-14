@@ -13,10 +13,14 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 
 
 ## [Unreleased]
+
+## [0.4.0] - 2026-10-15
+### Added
+- plural of resource names ending in "ch", "sh" or "x", which now take "es" (speech becomes speeches)
+
+## [0.3.0] - 2025-02-19
 ### Added
 - post_sub_resource method
-### Fixed
-- plural of resource names ending in "ch", "sh" or "x", which now take "es" (speech becomes speeches)
 
 ## [0.2.2] - 2023-07-20
 ### Fixed
