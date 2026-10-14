@@ -15,6 +15,8 @@ Given a version number MAJOR.MINOR.PATCH, increment:
 ## [Unreleased]
 ### Added
 - post_sub_resource method
+### Fixed
+- plural of resource names ending in "ch", "sh" or "x", which now take "es" (speech becomes speeches)
 
 ## [0.2.2] - 2023-07-20
 ### Fixed
