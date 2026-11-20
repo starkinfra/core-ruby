@@ -151,6 +151,33 @@ module StarkCore
         return entities
       end
 
+      def self.patch_multi(resource_name:, resource_maker:, sdk_version:, host:, api_version:, user:, language:, timeout:, entities:, **query)
+
+        jsons = []
+        entities.each do |entity|
+          jsons << StarkCore::Utils::API.api_json(entity)
+        end
+        payload = { StarkCore::Utils::API.last_name_plural(resource_name) => jsons }
+
+        json = StarkCore::Utils::Request.fetch(
+          host: host,
+          sdk_version: sdk_version,
+          user: user,
+          method: 'PATCH',
+          path: StarkCore::Utils::API.endpoint(resource_name),
+          query: query,
+          payload: payload,
+          api_version: api_version,
+          timeout: timeout
+        ).json
+        returned_jsons = json[StarkCore::Utils::API.last_name_plural(resource_name)]
+        entities = []
+        returned_jsons.each do |returned_json|
+          entities << StarkCore::Utils::API.from_api_json(resource_maker, returned_json)
+        end
+        return entities
+      end
+
       def self.post_single(resource_name:, resource_maker:, sdk_version:, host:, api_version:, user:, language:, timeout:, entity:)
         payload = StarkCore::Utils::API.api_json(entity)
         json = StarkCore::Utils::Request.fetch(
