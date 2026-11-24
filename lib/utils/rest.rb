@@ -168,6 +168,7 @@ module StarkCore
           query: query,
           payload: payload,
           api_version: api_version,
+          language: language,
           timeout: timeout
         ).json
         returned_jsons = json[StarkCore::Utils::API.last_name_plural(resource_name)]

@@ -30,7 +30,7 @@ describe 'StarkCore::Utils::Rest.patch_multi' do
     StarkCore::Project.new(environment: 'sandbox', id: '5656565656565656', private_key: EllipticCurve::PrivateKey.new.toPem)
   end
 
-  def patch_multi(entities, reply_code: '200', reply_body: '{"cards": [{"id": "1"}, {"id": "2"}]}', **query)
+  def patch_multi(entities, reply_code: '200', reply_body: '{"cards": [{"id": "1"}, {"id": "2"}]}', language: 'en-US', **query)
     sent = []
     http = Object.new
     http.define_singleton_method(:request) { |req| sent << req; FakeReply.new(reply_code, reply_body) }
@@ -43,7 +43,7 @@ describe 'StarkCore::Utils::Rest.patch_multi' do
         host: StarkCore::Utils::StarkHost::INFRA,
         api_version: 'v2',
         user: project,
-        language: 'en-US',
+        language: language,
         timeout: 15,
         entities: entities,
         **query
@@ -81,6 +81,12 @@ describe 'StarkCore::Utils::Rest.patch_multi' do
     _, sent = patch_multi([{ id: '1' }], expand: ['rules'])
 
     expect(sent[0].path).must_equal('/v2/card?expand=rules')
+  end
+
+  it 'sends the given language in Accept-Language' do
+    _, sent = patch_multi([{ id: '1' }], language: 'pt-BR')
+
+    expect(sent[0]['Accept-Language']).must_equal('pt-BR')
   end
 
   it 'raises the API error untouched' do
